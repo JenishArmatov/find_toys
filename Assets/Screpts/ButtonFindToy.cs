@@ -122,7 +122,7 @@ public class FindToyController : MonoBehaviour
 
         animMoveObject = false;
         material.color = Color.white;
-        Controller.flag = false;
+        Controller.isFirstItem = false;
         Score--;
         text.text = Score + "";
         click = false;

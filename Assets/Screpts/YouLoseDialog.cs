@@ -19,7 +19,7 @@ public class YouLoseDialog : MonoBehaviour
     public void RetryClick()
     {
         animator.Play("Close");
-        Controller.flag = false;
+        Controller.isFirstItem = false;
         StartCoroutine(StartLevel());
 
     }

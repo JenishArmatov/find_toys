@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
-    public static bool flag = false;
+    public static bool isFirstItem = false;
     public static GameObject oldGameObject;
     public static GameObject newGameObject;
     public static bool LOSE = false;

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-
-
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour, IDragHandler, IEndDragHandler
 {
@@ -45,9 +44,9 @@ public class NewBehaviourScript : MonoBehaviour, IDragHandler, IEndDragHandler
         if (_isInAreaDestroyPlane) {
             GetComponent<Rigidbody>().useGravity = false;
 
-            if (!Controller.flag)
+            if (!Controller.isFirstItem)
             {
-                Controller.flag = true;
+                Controller.isFirstItem = true;
                 _isInAreaDestroyPlane = false;
                 Rigidbody r = GetComponent<Rigidbody>();
                 r.constraints = RigidbodyConstraints.FreezeAll; 
@@ -118,18 +117,15 @@ public class NewBehaviourScript : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             AnimationChoseWrong();
         }
-/*
+
         if (Application.platform == RuntimePlatform.Android)
         {
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-
-                Application.Quit();
-
-            }
+            ExitToMainMenu();
         }
-*/
+    }
+    private void ExitToMainMenu() {
+        SceneManager.LoadScene(1);
     }
     private void AnimationDestroidPair() {
 
@@ -171,7 +167,7 @@ public class NewBehaviourScript : MonoBehaviour, IDragHandler, IEndDragHandler
 
             PlayerPrefs.SetFloat(Controller.SCORE_STING, score);
             Controller.SCORE_FLOAT = score;
-            Controller.flag = false;
+            Controller.isFirstItem = false;
 
             _material.color = Color.white;
 
@@ -226,12 +222,12 @@ public class NewBehaviourScript : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void checkIsInAreaDestroyPlane()
     {
-        if (Controller.flag)
+        if (Controller.isFirstItem)
         {
             if (Controller.oldGameObject.GetHashCode() == gameObject.GetHashCode())
             {
 
-                Controller.flag = false;
+                Controller.isFirstItem = false;
 
                 return;
 
